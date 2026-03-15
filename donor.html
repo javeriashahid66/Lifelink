@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeLink — Register as Donor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --red: #C0001A; --dark: #1A0A0A; --grey: #6B5B5B; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: #FDF6F0; color: var(--dark); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(192,0,26,0.97); box-shadow: 0 2px 30px rgba(192,0,26,0.3); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; }
+    .nav-logo span { color: #FFB3B3; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; text-transform: uppercase; }
+    .nav-links a:hover { color: white; }
+    .nav-btn { background: white; color: var(--red) !important; padding: 8px 22px; border-radius: 50px; font-weight: 600 !important; }
+    .page { padding: 120px 60px 60px; max-width: 700px; margin: 0 auto; }
+    .page h1 { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--dark); margin-bottom: 10px; }
+    .page p { color: var(--grey); font-size: 16px; margin-bottom: 40px; }
+    .form-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 24px rgba(26,10,10,0.08); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--grey); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .form-group input, .form-group select { width: 100%; padding: 14px 20px; border: 2px solid rgba(192,0,26,0.15); border-radius: 12px; font-size: 15px; font-family: 'DM Sans', sans-serif; outline: none; background: #FDF6F0; color: var(--dark); }
+    .form-group input:focus, .form-group select:focus { border-color: var(--red); background: white; }
+    .submit-btn { width: 100%; background: var(--red); color: white; padding: 16px; border-radius: 50px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; transition: transform 0.2s; }
+    .submit-btn:hover { transform: translateY(-2px); }
+    .success-msg { background: rgba(0,160,60,0.08); border: 2px solid rgba(0,160,60,0.3); color: #007a2e; padding: 16px 24px; border-radius: 12px; margin-bottom: 24px; font-weight: 600; text-align: center; font-size: 16px; }
+    footer { background: var(--dark); padding: 40px 60px; text-align: center; color: rgba(255,255,255,0.4); font-size: 14px; margin-top: 80px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; color: white; margin-bottom: 10px; }
+    .footer-logo span { color: #FF1A35; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life<span>Link</span></div>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/donor">Donate</a></li>
+    <li><a href="/search">Find Blood</a></li>
+    <li><a href="/donors">All Donors</a></li>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/donor" class="nav-btn">Donate Now</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <h1>Register as Donor</h1>
+  <p>Join LifeLink aur ek zindagi bachao! 🩸</p>
+
+  {% if success %}
+  <div class="success-msg">
+    ✅ Shukriya! Aap ka registration ho gaya! Aap ek zindagi bacha sakte hain!
+  </div>
+  {% endif %}
+
+  <div class="form-card">
+    <form action="/donor" method="POST">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Apna poora naam likhein" required>
+      </div>
+      <div class="form-group">
+        <label>Blood Group</label>
+        <input type="text" name="blood_group" placeholder="e.g. A+, B-, O+" required>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input type="text" name="city" placeholder="Apna sheher likhein" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone" placeholder="0300-0000000" required>
+      </div>
+      <div class="form-group">
+        <label>Availability Status</label>
+        <select name="available">
+          <option value="1">✅ Available to Donate</option>
+          <option value="0">❌ Not Available</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn">Register Now 🩸</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Life<span>Link</span></div>
+  <p>Made with ❤️ for Pakistan — LifeLink 2026</p>
+</footer>
+
+</body>
+</html>

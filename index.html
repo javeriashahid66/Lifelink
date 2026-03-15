@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeLink — Every Drop Counts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C0001A;
+      --red-dark: #8B0013;
+      --red-light: #FF1A35;
+      --cream: #FDF6F0;
+      --dark: #1A0A0A;
+      --grey: #6B5B5B;
+      --white: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background-color: var(--cream); color: var(--dark); overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(192,0,26,0.97); backdrop-filter: blur(10px); box-shadow: 0 2px 30px rgba(192,0,26,0.3); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; letter-spacing: 1px; }
+    .nav-logo span { color: #FFB3B3; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .nav-btn { background: white; color: var(--red) !important; padding: 8px 22px; border-radius: 50px; font-weight: 600 !important; }
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 60px 60px; background: #0D0000; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(160,0,20,0.6) 0%, transparent 60%), radial-gradient(ellipse at 30% 80%, rgba(100,0,10,0.4) 0%, transparent 50%); }
+    .hero-content { position: relative; z-index: 2; max-width: 600px; animation: fadeUp 0.8s ease forwards; }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.1); color: rgba(255,200,200,0.9); border: 1px solid rgba(255,100,100,0.3); padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 900; line-height: 1.05; color: white; margin-bottom: 20px; }
+    .hero h1 .highlight { color: #FF4455; display: block; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; }
+    .hero-btns { display: flex; gap: 16px; align-items: center; }
+    .btn-primary { background: var(--red); color: white; padding: 16px 36px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; box-shadow: 0 8px 30px rgba(192,0,26,0.5); transition: transform 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-secondary { color: rgba(255,255,255,0.8); font-size: 15px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.3); padding: 16px 28px; border-radius: 50px; transition: background 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+    .hero-stats { display: flex; gap: 50px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #FF4455; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+    .section { padding: 100px 60px; }
+    .section-tag { display: inline-block; background: rgba(192,0,26,0.08); color: var(--red); padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700; color: var(--dark); margin-bottom: 60px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .service-card { background: white; border-radius: 20px; padding: 36px 28px; box-shadow: 0 4px 24px rgba(26,10,10,0.06); border: 1px solid rgba(192,0,26,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(192,0,26,0.12); }
+    .service-icon { font-size: 36px; margin-bottom: 16px; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: var(--grey); line-height: 1.6; }
+    footer { background: var(--dark); padding: 60px; text-align: center; color: rgba(255,255,255,0.4); font-size: 14px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 28px; color: white; margin-bottom: 16px; }
+    .footer-logo span { color: var(--red-light); }
+    .footer-links { display: flex; justify-content: center; gap: 30px; margin: 20px 0; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life<span>Link</span></div>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/donor">Donate</a></li>
+    <li><a href="/search">Find Blood</a></li>
+    <li><a href="/donors">All Donors</a></li>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/donor" class="nav-btn">Donate Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">🇵🇰 Pakistan's Blood Network</span>
+    <h1>Save Lives,<span class="highlight">Donate Blood</span></h1>
+    <p>Pakistan ka pehla online blood bank system. Emergency mein donor dhundho — seconds mein. Apni city, apna blood group, apni zindagi.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="/search">🔍 Find Blood Now</a>
+      <a class="btn-secondary" href="/donor">Become a Donor →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">{{ total_donors }}</div><div class="stat-label">Registered Donors</div></div>
+      <div><div class="stat-num">{{ cities }}</div><div class="stat-label">Cities Covered</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <span class="section-tag">What We Offer</span>
+  <h2>Hamari Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>Blood Donor Search</h3>
+      <p>Apne sheher mein compatible blood group ke donors dhundho — real time mein.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚨</div>
+      <h3>Emergency Request</h3>
+      <p>Emergency mein turant request bhejo — donors ko alert milta hai.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <h3>Hospital Registration</h3>
+      <p>Hospitals apna blood bank register karein aur inventory manage karein.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <h3>Donation History</h3>
+      <p>Apni donation history track karein aur certificates hasil karein.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Life<span>Link</span></div>
+  <p>Pakistan ka Online Blood Bank System</p>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/donor">Donor Registration</a></li>
+    <li><a href="/search">Blood Search</a></li>
+    <li><a href="/donors">All Donors</a></li>
+  </ul>
+  <p style="margin-top:20px;">Made with ❤️ for Pakistan — LifeLink 2026</p>
+</footer>
+
+</body>
+</html>

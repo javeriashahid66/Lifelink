@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeLink — All Donors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --red: #C0001A; --dark: #1A0A0A; --grey: #6B5B5B; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: #FDF6F0; color: var(--dark); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(192,0,26,0.97); box-shadow: 0 2px 30px rgba(192,0,26,0.3); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; }
+    .nav-logo span { color: #FFB3B3; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; text-transform: uppercase; }
+    .nav-links a:hover { color: white; }
+    .nav-btn { background: white; color: var(--red) !important; padding: 8px 22px; border-radius: 50px; font-weight: 600 !important; }
+    .page { padding: 120px 60px 60px; }
+    .page h1 { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--dark); margin-bottom: 10px; }
+    .total { color: var(--red); font-size: 16px; font-weight: 600; margin-bottom: 40px; }
+    .donors-table { width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(26,10,10,0.08); }
+    .donors-table th { background: var(--red); color: white; padding: 16px 24px; text-align: left; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .donors-table td { padding: 16px 24px; border-bottom: 1px solid rgba(192,0,26,0.06); font-size: 15px; }
+    .donors-table tr:last-child td { border-bottom: none; }
+    .donors-table tr:hover td { background: rgba(192,0,26,0.02); }
+    .blood-badge { background: rgba(192,0,26,0.1); color: var(--red); padding: 4px 12px; border-radius: 50px; font-weight: 700; font-size: 13px; }
+    .status-yes { background: rgba(0,160,60,0.1); color: #007a2e; padding: 4px 12px; border-radius: 50px; font-size: 13px; font-weight: 600; }
+    .status-no { background: rgba(192,0,26,0.1); color: var(--red); padding: 4px 12px; border-radius: 50px; font-size: 13px; font-weight: 600; }
+    footer { background: var(--dark); padding: 40px 60px; text-align: center; color: rgba(255,255,255,0.4); font-size: 14px; margin-top: 80px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; color: white; margin-bottom: 10px; }
+    .footer-logo span { color: #FF1A35; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life<span>Link</span></div>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/donor">Donate</a></li>
+    <li><a href="/search">Find Blood</a></li>
+    <li><a href="/donors">All Donors</a></li>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/donor" class="nav-btn">Donate Now</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <h1>All Registered Donors</h1>
+  <p class="total">🩸 Total Donors: {{ donors|length }}</p>
+
+  <table class="donors-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Donor Name</th>
+        <th>Blood Group</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for donor in donors %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ donor.name }}</td>
+        <td><span class="blood-badge">{{ donor.blood_group }}</span></td>
+        <td>{{ donor.city }}</td>
+        <td>{{ donor.phone }}</td>
+        <td>{% if donor.available %}<span class="status-yes">✓ Available</span>{% else %}<span class="status-no">✗ Busy</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <div class="footer-logo">Life<span>Link</span></div>
+  <p>Made with ❤️ for Pakistan — LifeLink 2026</p>
+</footer>
+
+</body>
+</html>
